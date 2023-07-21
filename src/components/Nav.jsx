@@ -33,8 +33,8 @@ const Nav = () => {
     }
 
     return (
-        <div className='nav h-[60px] width-full py-1 px-3 flex justify-between items-center bg-neutral-100 fixed z-10 to-5 left-0 w-screen'>
-            <div className="left flex items-center justify-center gap-20 xl:gap-15 lg:gap-10 ">
+        <div className='nav h-[60px] width-full py-1 px-10 xl:px-5 lg:px-3 flex justify-between items-center bg-neutral-100 fixed z-10 to-5 left-0 w-screen'>
+            <div className="left flex items-center justify-center gap-20 xl:gap-15 lg:gap-8 ">
                 <Logo />
 
                 <div className="nav-items font-medium md:hidden">
