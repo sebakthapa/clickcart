@@ -1,4 +1,3 @@
-"use client"
 import React from 'react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -9,6 +8,7 @@ import Info from '@/components/Info';
 import Nav from '@/components/Nav';
 import { CategoriesContextProvider } from '@/context/categoriesContext';
 import { ProductContexProvider } from '@/context/productsContext';
+import { QUERYCLIENTPROVIDER } from '@/lib/queryClient';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,11 +21,11 @@ export const metadata = {
 
 
 export default function RootLayout({ children }) {
-  const [queryClient] = React.useState(() => new QueryClient());
+  // const [queryClient] = React.useState(() => new QueryClient());
   return (
     <html lang="en">
       <body className={inter.className + " min-h-[100vh] max-w-[2000px]"}>
-        <QueryClientProvider client={queryClient}>
+        <QUERYCLIENTPROVIDER>
 
           <CategoriesContextProvider>
             <ProductContexProvider>
@@ -42,8 +42,8 @@ export default function RootLayout({ children }) {
           </CategoriesContextProvider>
 
 
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
+          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+        </QUERYCLIENTPROVIDER>
       </body>
     </html>
   )
