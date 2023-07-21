@@ -10,7 +10,7 @@ const Page = ({ params }) => {
   const [count, setCount] = useState(1)
 
   const fetchSingleProduct = async () => {
-    const response = await fetch(`http://fakestoreapi.com/products/${params.id}`);
+    const response = await fetch(`https://fakestoreapi.com/products/${params.id}`);
     const res = await response.json();
     return res;
   }

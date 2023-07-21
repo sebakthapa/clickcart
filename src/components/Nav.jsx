@@ -162,49 +162,60 @@ const Nav = ({ }) => {
             <div className="right flex items-center justify-center gap-10 lg:gap-5 w-fit ">
                 <div className={` search-container inline-block w-fit relative cursor-pointer`} >
                     <form onSubmit={handleSearch} style={{ transition: "width .5s linear" }} className="searchInputContainer flex items-center rounded-lg">
-                        <input autoComplete="off" id="searchInput" className={` input bg-gray-100 border-solid border-gray-200 border-2 border-r-0  absolute w-[300px] xl:w-[85px] lg:w-[0] px-4  focus:w-[300px] left-auto right-[49px] text-base bg-transparent   outline-none cursor-pointer rounded-full rounded-r-none focus:px-4 py-2 `} value={searchText} onChange={handleSearchInput} onBlur={() => setTimeout(() => setSearchFocused(false), 100)} onFocus={() => setSearchFocused(true)} type="text" placeholder="Search Product" />
+                        <input autoComplete="off" id="searchInput" className={` input bg-gray-100 border-solid border-gray-200 border-2 border-r-0  absolute w-[300px] xl:w-[85px] lg:w-[0] px-4  focus:w-[300px] left-auto right-[49px] text-base outline-none cursor-pointer rounded-full rounded-r-none focus:px-4 py-2 `} value={searchText} onChange={handleSearchInput} onBlur={() => setTimeout(() => setSearchFocused(false), 100)} onFocus={() => setSearchFocused(true)} type="text" placeholder="Search Product" />
                         <label htmlFor="searchInput" type="submit" className="icon border-solid border-gray-200 border-2 border-l-0 rounded-full rounded-l-none  w-[50px] cursor-pointer flex items-center justify-center px-4 py-2" onClick={handleSearchClick}>
                             <AiOutlineSearch className="w-6 h-6 text-gray-500" />
                         </label>
                     </form>
-                    <div className={`search-content ${!searchFocused ? "hidden" : "block"} absolute top-full right-0 sm:right-[-50px] w-[500px] sm:w-[90vw] bg-gray-50 rounded-lg p-5 sm:p-2 h-[80vh] overflow-auto`}>
+                    <div className={`search-content ${!searchFocused ? "hidden" : "block"} absolute top-full right-0 sm:right-[-50px] w-[500px] sm:w-[90vw] bg-gray-50 rounded-lg p-5 sm:p-2 max-h-[80vh] overflow-auto`}>
                         {
-                            searchFocused ? (
-                                <div className="flex flex-col gap-5">
+                            searchText ? (
+                                <>
                                     {
-                                        searchedData?.map(({ title, image, id, price, rating }, idx) => {
-                                            return (
-                                                <Link href={`/products/${id}`}  className="search-card py-5 px-7 sm:py-3 sm:px-4 flex items-center gap-3 hover:bg-gray-200" key={idx}>
-                                                    <div className="image w-[80px] h-[80px] overflow-hidden">
-                                                        <Image className="w-full h-full object-contain" alt={title} src={image} height={100} width={50} />
-                                                    </div>
-                                                    <div className="details w-[80%] flex flex-col gap-1">
-                                                        <h2 className="title font-bold">{getSomeWords(title, 5)}</h2>
-                                                        <div className="others flex justify-between items-center">
-                                                            <div className="ratings flex gap-1 items-center">
-                                                                <span className="stars flex">
-                                                                    {
-                                                                        Array(Math.floor(rating?.rate ? rating.rate : 0))
-                                                                            .fill()
-                                                                            .map((_, i) => (
-                                                                                <AiFillStar key={i} className='text-yellow-500 w-5 h-5' />
-                                                                            ))}
-                                                                </span>
-                                                                <span className="number text-sm">({rating?.count})</span>
-                                                            </div>
-                                                            <p className="price font-semibold">${price}</p>
+                                        searchedData?.length > 0 ? (
+                                            <div className="flex flex-col gap-5">
+                                                {
+                                                    searchedData?.map(({ title, image, id, price, rating }, idx) => {
+                                                        return (
+                                                            <Link href={`/products/${id}`} className="search-card py-5 px-7 sm:py-3 sm:px-4 flex items-center gap-3 hover:bg-gray-200" key={idx}>
+                                                                <div className="image w-[80px] h-[80px] overflow-hidden">
+                                                                    <Image className="w-full h-full object-contain" alt={title} src={image} height={100} width={50} />
+                                                                </div>
+                                                                <div className="details w-[80%] flex flex-col gap-1">
+                                                                    <h2 className="title font-bold">{getSomeWords(title, 5)}</h2>
+                                                                    <div className="others flex justify-between items-center">
+                                                                        <div className="ratings flex gap-1 items-center">
+                                                                            <span className="stars flex">
+                                                                                {
+                                                                                    Array(Math.floor(rating?.rate ? rating.rate : 0))
+                                                                                        .fill()
+                                                                                        .map((_, i) => (
+                                                                                            <AiFillStar key={i} className='text-yellow-500 w-5 h-5' />
+                                                                                        ))}
+                                                                            </span>
+                                                                            <span className="number text-sm">({rating?.count})</span>
+                                                                        </div>
+                                                                        <p className="price font-semibold">${price}</p>
 
-                                                        </div>
+                                                                    </div>
 
-                                                    </div>
-                                                </Link>
-                                            )
-                                        })
+                                                                </div>
+                                                            </Link>
+                                                        )
+                                                    })
+                                                }
+                                            </div>
+                                        ) : (
+                                            <p className="text-center p-4">Oops! product not found...</p>
+                                        )
+
                                     }
-                                </div>
+                                </>
                             ) : (
-                                <p className="text-center p-4">Nothing matched your search</p>
+                                <p className="text-center p-4">Start typing to search...</p>
+
                             )
+
                         }
                     </div>
 
