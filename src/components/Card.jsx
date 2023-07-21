@@ -4,7 +4,12 @@ import Link from 'next/link';
 import React from 'react'
 import { AiFillStar } from 'react-icons/ai';
 
-const Card = ({link, title, description, price, image, rating, category, }) => {
+const Card = ({ link, priority, title, description, price, image, rating, category, }) => {
+  
+  const handleAddCart = () => {
+
+  }
+
   if (!image) {
     return ""
   }
@@ -12,7 +17,7 @@ const Card = ({link, title, description, price, image, rating, category, }) => {
     <div className='card  h-[450px] w-full m-4 flex flex-col justify-between gap-4 bg-white rounded '>
         
       <Link href={link} className="image cursor-pointer w-full h-[60%] overflow-hidden group">
-          <Image className='w-full h-full  object-contain px-10 py-4 group-hover:scale-110 active:scale-95 transition duration-500' alt={title} src={image} width={200} height={300} />
+          <Image priority={priority} className='w-full h-full  object-contain px-10 py-4 group-hover:scale-110 active:scale-95 transition duration-500' alt={title} src={image} width={200} height={300} />
         </Link>
 
         <div className="texts h-[40%] flex flex-col justify-between gap-2 py-4 px-5">
@@ -35,7 +40,7 @@ const Card = ({link, title, description, price, image, rating, category, }) => {
             <span className="number text-sm">({rating?.count})</span>
           </div>
 
-          <button className="button bg-green-700 py-3 w-full text-neutral-100 font-semibold hover:bg-green-600 transition duration-300">
+          <button onClick={handleAddCart} className="button active:scale-90 bg-green-700 py-3 w-full text-neutral-100 font-semibold hover:bg-green-600 transition duration-300">
             Add to Cart
           </button>
         </div>

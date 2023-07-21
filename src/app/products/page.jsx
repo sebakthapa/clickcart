@@ -1,21 +1,22 @@
 "use client"
 import Card from '@/components/Card'
+import CardsContainer from '@/components/CardsContainer'
 import PageLoader from '@/components/PageLoader'
 import { ProductContextProvider, ProductsContext } from '@/context/productsContext'
-import { groupObjectsRandomly } from '@/lib'
+// import { groupObjectsRandomly } from '@/lib'
 import { useQueries, useQuery } from '@tanstack/react-query'
 import React, { useContext, useEffect, useState } from 'react'
 
 const Page = () => {
     const isClient = typeof window !== 'undefined';
 
-    const [width, setWidth] = useState(isClient ? window?.innerWidth : 0);
-    const [maxArrayLen, setMaxArrLen] = useState(Math.floor(isClient ? window?.innerWidth / 400 : 0))
+    // const [width, setWidth] = useState(isClient ? window?.innerWidth : 0);
+    // const [maxArrayLen, setMaxArrLen] = useState(Math.floor(isClient ? window?.innerWidth / 400 : 0))
 
 
     const { products, setProducts } = useContext(ProductsContext);
 
-    const [finalProductsArray, setFinalProductsArray] = useState(products)
+    // const [finalProductsArray, setFinalProductsArray] = useState(products)
 
 
 
@@ -33,28 +34,27 @@ const Page = () => {
     const { isError, isLoading, data: fetchedProducts } = useQuery({ queryKey: ['products'], queryFn: fetchAllProducts })
 
 
-    useEffect(() => {
+    // useEffect(() => {
+    //     function handleResize() {
+    //         setWidth(window.innerWidth);
+    //         if (width < 350) {
+    //             setMaxArrLen(1)
+    //         } else {
+    //             width > 1000 ? setMaxArrLen(Math.floor(window.innerWidth / 400)) : setMaxArrLen(Math.floor(window.innerWidth / 350));
+    //         }
+    //     }
+    //     window.addEventListener("resize", handleResize);
+    //         return () => window.removeEventListener("resize", handleResize);
             
-        function handleResize() {
-            setWidth(window.innerWidth);
-            if (width < 350) {
-                setMaxArrLen(1)
-            } else {
-                width > 1000 ? setMaxArrLen(Math.floor(window.innerWidth / 400)) : setMaxArrLen(Math.floor(window.innerWidth / 350));
-            }
-        }
-        window.addEventListener("resize", handleResize);
-            return () => window.removeEventListener("resize", handleResize);
-            
-    }, [width]);
+    // }, [width]);
 
-    useEffect(() => {
-        if (products?.length > 0) {
-            setFinalProductsArray(groupObjectsRandomly(products, maxArrayLen < 1 ? 1 : maxArrayLen))
+    // useEffect(() => {
+    //     if (products?.length > 0) {
+    //         setFinalProductsArray(groupObjectsRandomly(products, maxArrayLen < 1 ? 1 : maxArrayLen))
 
-        }
+    //     }
         
-    }, [maxArrayLen, products?.length])
+    // }, [maxArrayLen, products?.length])
     
 
 
@@ -83,7 +83,7 @@ const Page = () => {
                     })
                 } */}
 
-                {
+                {/* {
                     finalProductsArray?.map((arr, idx) => {
                         return (
                             <div key={idx} className="products-row flex w-full">
@@ -97,7 +97,9 @@ const Page = () => {
                             </div>
                         )
                     })
-                }
+                } */}
+
+                <CardsContainer arrayOfObjects={products} />
             </div>
         </div>
     )

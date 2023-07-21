@@ -31,7 +31,7 @@ const Page = ({ params }) => {
   return (
     <div className='product-details mt-[113px] flex md:flex-col-reverse justify-center gap-10 w-full 0 p-10 sm:p-5'>
       <div className="images w-[50%] lg:w-[50%] md:w-full flex flex-col items-center gap-5">
-        <div className="image ">
+        <div className="image p-5 bg-white">
           <Image priority="true" alt={fetchedProduct.title} className='object-contain' src={fetchedProduct.image} height={400} width={600} />
         </div>
         <div className="option-images flex justify-center gap-3 w-fit">

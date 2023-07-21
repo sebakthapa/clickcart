@@ -9,6 +9,7 @@ import Nav from '@/components/Nav';
 import { CategoriesContextProvider } from '@/context/categoriesContext';
 import { ProductContexProvider } from '@/context/productsContext';
 import { QUERYCLIENTPROVIDER } from '@/lib/queryClient';
+import { CartContextProvider } from '@/context/cartContext';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -29,20 +30,22 @@ export default function RootLayout({ children }) {
 
           <CategoriesContextProvider>
             <ProductContexProvider>
+              <CartContextProvider>
+                
+
+                <div className="header fixed z-50 top-0 left-0 w-full">
+                  <Info message="Get 50% off on selected items" phone="+056-23485" link="#" />
+                  <Nav />
+                </div>
+                {children}
 
 
-              <div className="header fixed z-50 top-0 left-0 w-full">
-                <Info message="Get 50% off on selected items" phone="+056-23485" link="#" />
-                <Nav />
-              </div>
-              {children}
-
-
+              </CartContextProvider>
             </ProductContexProvider>
           </CategoriesContextProvider>
 
 
-          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+          <ReactQueryDevtools initialIsOpen={false} />
         </QUERYCLIENTPROVIDER>
       </body>
     </html>

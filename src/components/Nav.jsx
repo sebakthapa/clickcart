@@ -144,7 +144,7 @@ const Nav = ({ }) => {
                                     <ul className="[] flex flex-col">
                                         {
                                             categories?.map((cat, idx) => {
-                                                return <li key={idx} className="capitalize w-fit"><Link href={`/products/${cat}`}>{cat}</Link ></li>
+                                                return <li key={idx} className="capitalize w-fit"><Link href={`/products/category/${cat}`}>{cat}</Link ></li>
                                             })
                                         }
                                     </ul>
@@ -152,7 +152,7 @@ const Nav = ({ }) => {
                             </div>
                         </li>
                         <li><Link href="/products">Products</Link> </li>
-                        <li><Link href="/">Delivery</Link> </li>
+                        <li><Link href="#">Delivery</Link> </li>
                     </ul>
                 </div >
             </div>
@@ -237,7 +237,7 @@ const Nav = ({ }) => {
                         </span>
                     </Link>
 
-                    <Link href="/" className="account flex items-center justify-center ">
+                    <Link href="/cart" className="account flex items-center justify-center ">
                         <span className="icon mr-1">
                             <TbShoppingCartPlus className="w-5 h-5" />
                         </span>
@@ -249,7 +249,7 @@ const Nav = ({ }) => {
             </div>
 
 
-            <div onClick={handleMobileNavClick} className={`mobile-nav bg-gray-100 fixed z-20 ${mobileNavShown ? "right-0" : "right-[-120%]"} top-0 h-screen w-screen bg_blur bg-[rgba(0,20,0,.2)] transition duration-500  hdden uppercase text-base font-medium`}>
+            <div onClick={handleMobileNavClick} className={`mobile-nav overflow-auto bg-gray-100 fixed z-20 ${mobileNavShown ? "right-0" : "right-[-120%]"} top-0 min-h-screen h-fit w-screen bg_blur bg-[rgba(0,20,0,.2)] transition duration-500  hdden uppercase text-base font-medium`}>
                 <div className="top flex items-center justify-between px-7 py-4 bg-green-900 text-gray-100">
                     <h2 className="text-3xl font-extrabold ">MENU</h2>
                     <div onClick={() => setMobileNavShown(false)} className="close w-[100px] bg-red-800 px-8 py-3 rounded text-center font-semibold text-gray-200  cursor-pointer flex items-center justify-center hover:bg-red-700 transition">
@@ -267,7 +267,7 @@ const Nav = ({ }) => {
                             <p className="_heading">Categories:</p>
                             {
                                 categories?.map((cat, idx) => {
-                                    return <Link key={idx} className="" href={cat}>{cat}</Link >
+                                    return <Link key={idx} className="" href={`/products/category/${cat}`}>{cat}</Link >
                                 })
                             }
                         </div>
@@ -275,13 +275,13 @@ const Nav = ({ }) => {
                         {/* other */}
                         <div className="section">
                             <Link href="/products"><li className="">Products</li></Link>
-                            <Link href="/"><li className="">Delivery</li></Link>
+                            <Link href="#"><li className="">Delivery</li></Link>
                         </div>
                     </ul>
                 </div >
 
                 <div className="menu flex flex-col items-center justify-center" >
-                    <Link href="#" className="account flex items-center justify-center  w-full py-4 hover:bg-gray-300">
+                    <Link  href="#" className="account flex items-center justify-center  w-full py-4 hover:bg-gray-300">
                         <span className="icon mr-1">
                             <BiUser className="w-5 h-5" />
                         </span>
@@ -290,7 +290,7 @@ const Nav = ({ }) => {
                         </span>
                     </Link>
 
-                    <Link href="/" className="account flex items-center justify-center w-full py-4 hover:bg-gray-300">
+                    <Link href="/cart" className="account flex items-center justify-center w-full py-4 hover:bg-gray-300">
                         <span className="icon mr-1">
                             <TbShoppingCartPlus className="w-5 h-5" />
                         </span>

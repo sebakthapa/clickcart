@@ -25,6 +25,8 @@ export function groupObjectsRandomly(objects, maxObjectsPerGroup) {
   return groups;
 }
 
+
+
 export function getSomeWords(text, num) {
   // Remove leading and trailing spaces, then split the text by spaces
   const words = text.trim().split(' ');
@@ -35,3 +37,4 @@ export function getSomeWords(text, num) {
   return firstFiveWords;
 }
 
+export const isClient = typeof window !== 'undefined';
