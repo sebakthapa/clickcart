@@ -69,15 +69,12 @@ const Nav = ({ }) => {
     const { isLoading, isError, error, data: fetchedCategories } = useQuery({ queryKey: ["categories"], queryFn: fetchCategories })
 
     useEffect(() => {
-        console.log("cat>>>>>>>>>>>>>>>>>>>>", categories)
     }, [categories])
 
 
 
     const handleSearch = (e) => {
         e.preventDefault();
-        console.log("submitted")
-        console.log(inputField)
     }
 
     const handleSearchInput = (e) => {
@@ -94,7 +91,6 @@ const Nav = ({ }) => {
             };
         });
 
-        console.log(mappedResults);
         setSearchedData(mappedResults)
 
 
@@ -191,7 +187,7 @@ const Nav = ({ }) => {
                                                                         Array(Math.floor(rating?.rate ? rating.rate : 0))
                                                                             .fill()
                                                                             .map((_, i) => (
-                                                                                <AiFillStar className='text-yellow-500 w-5 h-5' />
+                                                                                <AiFillStar key={i} className='text-yellow-500 w-5 h-5' />
                                                                             ))}
                                                                 </span>
                                                                 <span className="number text-sm">({rating?.count})</span>

@@ -6,7 +6,7 @@ import { groupObjectsRandomly } from '@/lib'
 import { useQueries, useQuery } from '@tanstack/react-query'
 import React, { useContext, useEffect, useState } from 'react'
 
-const page = () => {
+const Page = () => {
     const isClient = typeof window !== 'undefined';
 
     const [width, setWidth] = useState(isClient ? window?.innerWidth : 0);
@@ -51,7 +51,6 @@ const page = () => {
     useEffect(() => {
         if (products?.length > 0) {
             setFinalProductsArray(groupObjectsRandomly(products, maxArrayLen < 1 ? 1 : maxArrayLen))
-            console.log(maxArrayLen)
 
         }
         
@@ -104,4 +103,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

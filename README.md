@@ -4,6 +4,15 @@
 This forked repo is a technical assessment for Creating basic E-commerce website.
 
 
+## Features/Functions
+
+- Fully responsive UI
+- Home page with landing image
+- Fully functional Search bar
+- Seperate products page to view all products
+- Product details page
+- Loader implemented
+
 ## Run Locally
 
 Clone the project

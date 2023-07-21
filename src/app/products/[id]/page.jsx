@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
 
-const page = ({ params }) => {
+const Page = ({ params }) => {
 
   const [count, setCount] = useState(1)
 
@@ -32,13 +32,13 @@ const page = ({ params }) => {
     <div className='product-details mt-[113px] flex md:flex-col-reverse justify-center gap-10 w-full 0 p-10 sm:p-5'>
       <div className="images w-[50%] lg:w-[50%] md:w-full flex flex-col items-center gap-5">
         <div className="image ">
-          <Image className='object-contain' src={fetchedProduct.image} height={400} width={600} />
+          <Image priority="true" alt={fetchedProduct.title} className='object-contain' src={fetchedProduct.image} height={400} width={600} />
         </div>
         <div className="option-images flex justify-center gap-3 w-fit">
-          <Image className='cursor-pointer w-15% xl:w-[80px] xs:w-[60px] p-4 xs:p-2 bg-green-100 rounded-lg hover:scale-110 transition duration-300' src={fetchedProduct.image} height={100} width={100} />
-          <Image className='cursor-pointer w-15% xl:w-[80px] xs:w-[60px] p-4 xs:p-2 bg-red-100 rounded-lg hover:scale-110 transition duration-300' src={fetchedProduct.image} height={100} width={100} />
-          <Image className='cursor-pointer w-15% xl:w-[80px] xs:w-[60px] p-4 xs:p-2 bg-blue-100 rounded-lg hover:scale-110 transition duration-300' src={fetchedProduct.image} height={100} width={100} />
-          <Image className='cursor-pointer w-15% xl:w-[80px] xs:w-[60px] p-4 xs:p-2 bg-yellow-100 rounded-lg hover:scale-110 transition duration-300' src={fetchedProduct.image} height={100} width={100} />
+          <Image alt={fetchedProduct.title} className='cursor-pointer w-15% xl:w-[80px] xs:w-[60px] p-4 xs:p-2 bg-green-100 rounded-lg hover:scale-110 transition duration-300' src={fetchedProduct.image} height={100} width={100} />
+          <Image alt={fetchedProduct.title} className='cursor-pointer w-15% xl:w-[80px] xs:w-[60px] p-4 xs:p-2 bg-red-100 rounded-lg hover:scale-110 transition duration-300' src={fetchedProduct.image} height={100} width={100} />
+          <Image alt={fetchedProduct.title} className='cursor-pointer w-15% xl:w-[80px] xs:w-[60px] p-4 xs:p-2 bg-blue-100 rounded-lg hover:scale-110 transition duration-300' src={fetchedProduct.image} height={100} width={100} />
+          <Image alt={fetchedProduct.title} className='cursor-pointer w-15% xl:w-[80px] xs:w-[60px] p-4 xs:p-2 bg-yellow-100 rounded-lg hover:scale-110 transition duration-300' src={fetchedProduct.image} height={100} width={100} />
         </div>
       </div>
 
@@ -52,7 +52,7 @@ const page = ({ params }) => {
                 Array(Math.floor(fetchedProduct.rating?.rate ? fetchedProduct.rating.rate : 0))
                   .fill()
                   .map((_, i) => (
-                    <AiFillStar className='text-yellow-500 w-7 h-7' />
+                    <AiFillStar key={i} className='text-yellow-500 w-7 h-7' />
                   ))}
             </span>
             <span className="number " title={`${fetchedProduct.rating?.count} customers rated this product`}>({fetchedProduct.rating?.count})</span>
@@ -94,4 +94,4 @@ const page = ({ params }) => {
   )
 }
 
-export default page
+export default Page
