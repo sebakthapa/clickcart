@@ -3,7 +3,7 @@ import { BsTelephone } from "react-icons/bs"
 
 const Info = ({phone, message, link}) => {
     return (
-        <div className='bg-green-950 flex text-neutral-100 items-center justify-center  sm:flex-row-reverse     py-1 px-5  text-xs '>
+        <div className='bg-green-950 flex text-neutral-100 items-center justify-center  sm:flex-row-reverse w-full py-2 px-5  text-xs '>
             <p className="phone flex items-center gap-1 xs:hidden">
                 <BsTelephone className="" />
                 <span className="min-w-[100px]">

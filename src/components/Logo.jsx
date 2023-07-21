@@ -7,10 +7,10 @@ const Logo = () => {
         <Link href="/">
         <div className="logo flex items-center gap-2">
             <div className="image">
-                <Image src={"/van.png"} height={50} width={50} className='brightness-75'/>
+                <Image alt='ClickCart Logo' src={"/van.png"} height={50} width={50} className='brightness-75'/>
             </div>
             <p className="text font-extrabold text-green-800 text-2xl lg:text-xl sm:text-lg md:text-2xl">
-                OnlineStore
+                ClickCart
             </p>
             </div>
             </Link>

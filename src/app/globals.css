@@ -16,15 +16,75 @@
   }
 }
 
+
 body {
   min-height: 100vh;
   background: hsl(0, 0%, 90%);
+  min-height: 300vh;
+
 }
 
 
 .bg_blur {
   backdrop-filter: blur(3px);
 }
+
+
+.animate_hover{
+  animation: hover 10s ease-in-out infinite;
+}
+
+
+@keyframes hover {
+	0% {
+		transform: translate(0);
+	}
+
+	10% {
+		transform: translate(-2px, -2px);
+	}
+
+	20% {
+		transform: translate(2px, -2px);
+	}
+
+	30% {
+		transform: translate(-2px, 2px);
+	}
+
+	40% {
+		transform: translate(2px, 2px);
+	}
+
+	50% {
+		transform: translate(-2px, -2px);
+	}
+
+	60% {
+		transform: translate(2px, -2px);
+	}
+
+	70% {
+		transform: translate(-2px, 2px);
+	}
+
+	80% {
+		transform: translate(-2px, -2px);
+	}
+
+	90% {
+		transform: translate(2px, -2px);
+	}
+
+	100% {
+		transform: translate(0);
+	}
+}
+
+
+
+
+
 
 
 
@@ -53,8 +113,8 @@ body {
 }
 .dropdown_items li {
   padding: 10px;
-  width: 150px;
   cursor: pointer;
+  min-width: 200px;
 }
 .dropdown_items li:hover {
   background: rgba(0, 0, 0, .1);
@@ -67,7 +127,7 @@ body {
   }
 
   .mobile-nav ._heading {
-    @apply  bg-green-900 w-full text-neutral-200 py-3 px-4 text-center;
+    @apply  bg-green-600 font-bold w-full text-neutral-50 py-3 px-4 text-center;
   }
 
   .mobile-nav .section{
@@ -75,3 +135,56 @@ body {
     width: 100%;
     margin-bottom: 15px;
   }
+
+ .section,
+ .home section{
+  @apply w-full px-[5%] lg:px-5;
+  }
+
+
+
+  
+
+/* Page loader */
+.page_loader {
+  width: 100%;
+  min-height: 100% !important;
+  display:flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20%;
+}
+
+.page_loader main{
+  height:100px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page_loader div {
+  width: 16px;
+  background: #4d7c0f;
+  margin-right: 10px;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.page_loader div:nth-child(1) {
+  animation-delay: -0.24s;
+}
+.page_loader div:nth-child(2) {
+  animation-delay: -0.12s;
+}
+.page_loader div:nth-child(3) {
+  animation-delay: 0;
+}
+@keyframes lds-facebook {
+  0% {
+    height: calc(10vh + 20px);
+    min-height: 64px;
+  }
+  50%, 100% {
+    height: calc(5vh + 10px);
+    min-height: 24px;
+  }
+}
