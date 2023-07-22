@@ -100,11 +100,7 @@ const Nav = ({ }) => {
     }
 
 
-    const handleSearchClick = (e) => {
-        const target = e.target;
-        const inputField = target.previousElementSibling;
-        !searchFocused && inputField.focus();
-    }
+    
 
     const handleMobileNavClick = (e) => {
         const tag = e.target.tagName;
@@ -122,6 +118,10 @@ const Nav = ({ }) => {
 
 
     const { data: fetchedProducts } = useQuery({ queryKey: ['products'], queryFn: fetchAllProducts })
+
+    const handleSearchBlur = () => {
+        setTimeout(() => setSearchFocused(false), 250)
+    }
 
     // if (isLoading) {
     //     return <PageLoader />
@@ -164,8 +164,8 @@ const Nav = ({ }) => {
             <div className="right flex items-center justify-center gap-10 lg:gap-5 w-fit ">
                 <div className={` search-container inline-block w-fit relative cursor-pointer`} >
                     <form onSubmit={handleSearch} style={{ transition: "width .5s linear" }} className="searchInputContainer flex items-center rounded-lg">
-                        <input autoComplete="off" id="searchInput" className={` input bg-gray-100 border-solid border-gray-200 border-2 border-r-0  absolute w-[300px] xl:w-[85px] lg:w-[0] px-4  focus:w-[300px] left-auto right-[49px] text-base outline-none cursor-pointer rounded-full rounded-r-none focus:px-4 py-2 `} value={searchText} onChange={handleSearchInput} onBlur={() => setTimeout(() => setSearchFocused(false), 100)} onFocus={() => setSearchFocused(true)} type="text" placeholder="Search Product" />
-                        <label htmlFor="searchInput" type="submit" className="icon border-solid border-gray-200 border-2 border-l-0 rounded-full rounded-l-none  w-[50px] cursor-pointer flex items-center justify-center px-4 py-2" onClick={handleSearchClick}>
+                        <input autoComplete="off" id="searchInput" className={` input bg-gray-100 border-solid border-gray-200 border-2 border-r-0  absolute w-[300px] xl:w-[85px] lg:w-[0] px-4  focus:w-[300px] left-auto right-[49px] text-base outline-none cursor-pointer rounded-full rounded-r-none focus:px-4 py-2 `} value={searchText} onChange={handleSearchInput} onBlur={handleSearchBlur} onFocus={() => setSearchFocused(true)} type="text" placeholder="Search Product" />
+                        <label htmlFor="searchInput" type="submit" className="icon border-solid border-gray-200 border-2 border-l-0 rounded-full rounded-l-none  w-[50px] cursor-pointer flex items-center justify-center px-4 py-2">
                             <AiOutlineSearch className="w-6 h-6 text-gray-500" />
                         </label>
                     </form>
