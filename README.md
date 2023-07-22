@@ -12,6 +12,7 @@ This forked repo is a technical assessment for Creating basic E-commerce website
 - Seperate products page to view all products
 - Product details page
 - Loader implemented
+- Add to cart Function implemented
 
 ## Run Locally
 
