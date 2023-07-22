@@ -155,7 +155,6 @@ const Nav = ({ }) => {
                             </div>
                         </li>
                         <li><Link href="/products">Products</Link> </li>
-                        <li><Link href="#">Delivery</Link> </li>
                     </ul>
                 </div >
             </div>
@@ -282,7 +281,6 @@ const Nav = ({ }) => {
                         {/* other */}
                         <div className="section">
                             <Link href="/products"><li className="">Products</li></Link>
-                            <Link href="#"><li className="">Delivery</li></Link>
                         </div>
                     </ul>
                 </div >

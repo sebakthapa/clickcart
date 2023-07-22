@@ -72,13 +72,13 @@ const Card = ({ type,quantity, link, priority, id, title, description, price, im
         {
           type == "checkout" ? (
             <div className='flex gap-5'>
-              <div className="counter flex items-center bg-green-50  rounded-full ">
+              <div className="counter flex items-center  bg-green-50  rounded-full ">
                 <button className="- py-3 sm:py-2 text-center align-middle  text-2xl sm:text-xl px-5 sm:px-4" onClick={handleCheckoutCountDec}>-</button>
                 <p className="count py-3 sm:py-2 text-center align-middle text-xl sm:text-lg font-semibold">{checkoutCount}</p>
                 <button className="plus py-3 sm:py-2 text-center align-middle text-2xl sm:text-xl px-5 sm:px-4 " onClick={handleCheckoutCountInc}>+</button>
               </div>
               <button onClick={handleAddCart} className="button active:scale-90 bg-red-700 py-3 w-full rounded-full text-neutral-100 font-semibold hover:bg-red-600 transition duration-300">
-                Remove from cart
+                Remove
               </button>
             </div>
           ) : (
