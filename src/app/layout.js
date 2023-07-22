@@ -38,7 +38,10 @@ export default function RootLayout({ children }) {
                   <Info message="Get 50% off on selected items" phone="+056-23485" link="#" />
                   <Nav />
                 </div>
+                <div className='min-h-screen'>
                 {children}
+
+                </div>
                 <Footer />
 
 

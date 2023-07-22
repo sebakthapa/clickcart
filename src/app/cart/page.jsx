@@ -7,7 +7,7 @@ import React, { useContext } from 'react'
 const Page = () => {
   const { cartData, subtotal } = useContext(CartContext);
 
-  
+
 
   return (
     <div className='section mt-[113px]'>
@@ -38,36 +38,40 @@ const Page = () => {
           cartData?.length > 0 && (
             <div className="payments mb-10 rounded-lg p-10 lg:p-5 bg-gray-100 w-[50%] lg:w-full flex flex-col gap-5 lg:gap-3 items-center">
               <div className="subtotal w-full mb-10">
-                <p className='text-lg  font-bold flex gap-3'>Subtotal: <span> $ {subtotal } </span></p>
+                <p className='text-lg  font-bold flex gap-3'>Subtotal: <span> $ {subtotal} </span></p>
               </div>
-              <div className="method-container flex flex-wrap justify-center gap-5">
-              <h4 className="text-xl font-semibold mb-8">Select Payment Method:</h4>
-                <div className="esewa flex flex-col items-center justify-center gap-3 w-fit bgred-500 p-5 rounded-xl cursor-pointer hover:bg-green-200 hover:shadow-lg hover:-translate-y-2 transition duration-500">
-                  <div className="img">
-                    <Image src="/esewa.png" width={80} height={80} />
+              <div className="payment-method ">
+                <h4 className="text-xl font-semibold mb-8">Select Payment Method:</h4>
+                <div className='mehtods-container flex flex-wrap justify-center gap-5'>
+
+                  <div className="esewa flex flex-col items-center justify-center gap-3 w-fit bgred-500 p-5 rounded-xl cursor-pointer hover:bg-green-200 hover:shadow-lg hover:-translate-y-2 transition duration-500">
+                    <div className="img">
+                      <Image src="/esewa.png" width={80} height={80} />
+                    </div>
+                    <div className="texts">
+                      Esewa Payment
+                    </div>
                   </div>
-                  <div className="texts">
-                    Esewa Payment
+
+                  <div className="khalti flex flex-col items-center justify-center gap-3 w-fit bgred-500 p-5 rounded-xl cursor-pointer hover:bg-purple-200 hover:shadow-lg hover:-translate-y-2 transition duration-500">
+                    <div className="img">
+                      <Image className='-mt-4' src="/khalti.png" width={100} height={100} />
+                    </div>
+                    <div className="texts">
+                      Khalti Payment
+                    </div>
+                  </div>
+
+                  <div className="bankTransfer flex flex-col items-center justify-center gap-3 w-fit bgred-500 p-5 rounded-xl cursor-pointer hover:bg-cyan-100 hover:shadow-lg hover:-translate-y-2 transition duration-500">
+                    <div className="img">
+                      <Image className='-mt-4' src="/bankTransfer.png" width={100} height={100} />
+                    </div>
+                    <div className="texts">
+                      Bank Transfer
+                    </div>
                   </div>
                 </div>
 
-                <div className="khalti flex flex-col items-center justify-center gap-3 w-fit bgred-500 p-5 rounded-xl cursor-pointer hover:bg-purple-200 hover:shadow-lg hover:-translate-y-2 transition duration-500">
-                  <div className="img">
-                    <Image className='-mt-4' src="/khalti.png" width={100} height={100} />
-                  </div>
-                  <div className="texts">
-                    Khalti Payment
-                  </div>
-                </div>
-
-                <div className="bankTransfer flex flex-col items-center justify-center gap-3 w-fit bgred-500 p-5 rounded-xl cursor-pointer hover:bg-cyan-100 hover:shadow-lg hover:-translate-y-2 transition duration-500">
-                  <div className="img">
-                    <Image className='-mt-4' src="/bankTransfer.png" width={100} height={100} />
-                  </div>
-                  <div className="texts">
-                    Bank Transfer
-                  </div>
-                </div>
               </div>
             </div>
 
