@@ -15,10 +15,13 @@ import lunr from "lunr"
 import { ProductsContext } from "@/context/productsContext"
 import Image from "next/image"
 import { getSomeWords } from "@/lib"
+import { CartContext } from "@/context/cartContext"
 
 const Nav = ({ }) => {
     const { categories, setCategories } = useContext(CategoriesContext);
     const { products, setProducts } = useContext(ProductsContext)
+
+    const {cartCount} = useContext(CartContext)
 
     const [searchText, setSearchText] = useState("");
     const [searchFocused, setSearchFocused] = useState(false);
@@ -237,12 +240,16 @@ const Nav = ({ }) => {
                         </span>
                     </Link>
 
-                    <Link href="/cart" className="account flex items-center justify-center ">
+                    <Link href="/cart" className=" account flex items-center justify-center ">
                         <span className="icon mr-1">
                             <TbShoppingCartPlus className="w-5 h-5" />
                         </span>
                         <span className="text">
                             Cart
+                        </span>
+                        <span class="cart-count relative flex h-5 w-5 ml-1">
+                            <span class="animate-ping absolute  flex h-full w-full rounded-full bg-green-700  opacity-75"></span>
+                            <span class="relative inline-flex  items-center justify-center rounded-full h-5 w-5 bg-green-800 text-white ">{cartCount}</span>
                         </span>
                     </Link>
                 </div>
@@ -281,7 +288,7 @@ const Nav = ({ }) => {
                 </div >
 
                 <div className="menu flex flex-col items-center justify-center" >
-                    <Link  href="#" className="account flex items-center justify-center  w-full py-4 hover:bg-gray-300">
+                    <Link href="#" className="account flex items-center justify-center  w-full py-4 hover:bg-gray-300">
                         <span className="icon mr-1">
                             <BiUser className="w-5 h-5" />
                         </span>
@@ -296,6 +303,10 @@ const Nav = ({ }) => {
                         </span>
                         <span className="text">
                             Cart
+                        </span>
+                        <span class="cart-count relative flex h-7 w-7 ml-1">
+                            <span class="animate-ping absolute  flex h-full w-full rounded-full bg-green-700  opacity-75"></span>
+                            <span class="relative inline-flex  items-center justify-center rounded-full h-7 w-7 bg-green-800 text-white ">{cartCount}</span>
                         </span>
                     </Link>
                 </div>

@@ -57,7 +57,7 @@ export default function Home() {
           {categories?.map((cat, idx) => {
             return (
               <Link href={`/products/category/${cat}`} key={idx} className='category-card block  relative group overflow-hidden  min-w-[200px] w-[250px] h-[400px] sm:w-[80%] xs:w-full   rounded-xl cursor-pointer'>
-                <Image className='absolute -z-10 top-0 left-0 w-full h-full object-cover group-hover:scale-[1.2] transition duration-500 brightness-50' src={`https://source.unsplash.com/random/180x320/?${cat}`} width="200" height="300" />
+                <Image className='absolute -z-10 top-0 left-0 w-full h-full object-cover group-hover:scale-[1.2] transition duration-500 brightness-50' src={`https://source.unsplash.com/random/180x320/?${cat}`} alt={`${cat} image`} width="200" height="300" />
                 <h3 className="absolute top-[50%] translate-y-[-50%] left-0 w-full text-center text-2xl category-title capitalize font-bold text-gray-100 group-hover:op-[20%] transition duration-500">{cat}</h3>
                 {/* <p className="browse flex items-center gap-1 justify-center capitalize absolute bottom-[0%] py-5 bg-gray-100 text-green-800 left-0 w-full opacity-0  group-hover:opacity-100  text-center transition duration-300  text-sm">
                   {cat} <span> <AiOutlineArrowRight /> </span>

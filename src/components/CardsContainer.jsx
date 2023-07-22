@@ -47,7 +47,7 @@ const CardsContainer = ({ arrayOfObjects }) => {
               {
                 arr.length > 0 && arr.map(({ title, id, description, rating, price, image, category }, idx) => {
                   return (
-                    <Card priority={idx < 8} link={`/products/${id}`} key={id} title={title} price={price} description={description} rating={rating} image={image} category={category} />
+                    <Card priority={idx < 8} link={`/products/${id}`} key={idx} id={id} title={title} price={price} description={description} rating={rating} image={image} category={category} />
                   )
                 })
               }

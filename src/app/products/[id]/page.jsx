@@ -1,13 +1,17 @@
 "use client"
 import PageLoader from '@/components/PageLoader';
+import { CartContext } from '@/context/cartContext';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
-import { useState } from 'react';
+import Link from 'next/link';
+import { useContext, useState } from 'react';
 import { AiFillStar } from 'react-icons/ai';
 
 const Page = ({ params }) => {
 
-  const [count, setCount] = useState(1)
+  const [count, setCount] = useState(1);
+  const {cartData,  addCart} = useContext(CartContext)
+
 
   const fetchSingleProduct = async () => {
     const response = await fetch(`https://fakestoreapi.com/products/${params.id}`);
@@ -16,6 +20,16 @@ const Page = ({ params }) => {
   }
 
   const { isLoading, isError, data: fetchedProduct, error } = useQuery({ queryKey: ["products", params.id], queryFn: fetchSingleProduct })
+
+  const handleAddCart = () => {
+    const cardData = { ...fetchedProduct, quantity:count }
+    // console.log(cardData)
+    addCart(cardData)
+    // console.log(cartData)
+    setCount(1)
+  }
+
+
 
 
   if (isError) {
@@ -81,8 +95,8 @@ const Page = ({ params }) => {
           </div>
 
           <div className="buttons flex gap-4">
-            <button className='py-3 px-7 sm:py-2 sm:px-5 text-gray-100 bg-green-800 hover:bg-green-700 hover:-translate-y-1 transition duration-300 rounded-full'>Buy Now</button>
-            <button className='py-3 px-7 sm:py-2 sm:px-5 text-green-800 hover:text-gray-100 hover:bg-green-800 border-solid border-2 border-green-800 rounded-full transition duration-300'>Add to Cart</button>
+            <Link href="/cart" onClick={handleAddCart} className='py-3 px-7 sm:py-2 sm:px-5 text-gray-100 bg-green-800 hover:bg-green-700 hover:-translate-y-1 transition duration-300 rounded-full'>Buy Now</Link>
+            <button className='py-3 px-7 sm:py-2 sm:px-5 text-green-800 hover:text-gray-100 hover:bg-green-800 border-solid border-2 border-green-800 rounded-full transition duration-300' onClick={handleAddCart}>Add to Cart</button>
           </div>
         </div>
 
