@@ -10,6 +10,7 @@ import { CategoriesContextProvider } from '@/context/categoriesContext';
 import { ProductContexProvider } from '@/context/productsContext';
 import { QUERYCLIENTPROVIDER } from '@/lib/queryClient';
 import { CartContextProvider } from '@/context/cartContext';
+import Footer from '@/components/Footer';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -38,6 +39,7 @@ export default function RootLayout({ children }) {
                   <Nav />
                 </div>
                 {children}
+                <Footer />
 
 
               </CartContextProvider>

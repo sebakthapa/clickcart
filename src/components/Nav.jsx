@@ -147,7 +147,7 @@ const Nav = ({ }) => {
                                     <ul className="[] flex flex-col">
                                         {
                                             categories?.map((cat, idx) => {
-                                                return <li key={idx} className="capitalize w-fit"><Link href={`/products/category/${cat}`}>{cat}</Link ></li>
+                                                return <Link key={idx} className="capitalize w-full h-full block" href={`/products/category/${cat}`}><li  className="">{cat} </li></Link >
                                             })
                                         }
                                     </ul>

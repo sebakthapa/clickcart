@@ -77,7 +77,7 @@ const Card = ({ type,quantity, link, priority, id, title, description, price, im
                 <p className="count py-3 sm:py-2 text-center align-middle text-xl sm:text-lg font-semibold">{checkoutCount}</p>
                 <button className="plus py-3 sm:py-2 text-center align-middle text-2xl sm:text-xl px-5 sm:px-4 " onClick={handleCheckoutCountInc}>+</button>
               </div>
-              <button onClick={handleAddCart} className="button active:scale-90 bg-red-700 py-3 w-full rounded-full text-neutral-100 font-semibold hover:bg-red-600 transition duration-300">
+              <button onClick={() => {removeCart(id)}} className="button active:scale-90 bg-red-700 py-3 w-full rounded-full text-neutral-100 font-semibold hover:bg-red-600 transition duration-300">
                 Remove
               </button>
             </div>

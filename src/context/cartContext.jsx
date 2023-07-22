@@ -10,6 +10,8 @@ export const CartContextProvider = (props) => {
 
   const [cartData, setCartData] = useState(initialCartData);
   const [cartCount, setCartCount] = useState(0);
+  const [subtotal, setSubtotal] = useState(0);
+
 
 
   const updateCartCount = () => {
@@ -25,6 +27,15 @@ export const CartContextProvider = (props) => {
     setCartCount(count)
   }
 
+  const calculateSubtotal = () => {
+    // Calculate subtotal
+    let subtotal = 0;
+    cartData.forEach((product) => {
+      subtotal += product.price * product.quantity;
+    });
+    setSubtotal(subtotal);
+  };
+
   // Save cart data to local storage when the cartData is updated
   useEffect(() => {
     isClient && localStorage.setItem('cartData', JSON.stringify(cartData));
@@ -34,6 +45,7 @@ export const CartContextProvider = (props) => {
 
 
     updateCartCount();
+    calculateSubtotal();
 
   }, [cartData]);
 
@@ -65,45 +77,40 @@ export const CartContextProvider = (props) => {
   }
 
   const decreaseCart = (id) => {
-    // const updatedProductArr = [];
-    // let updatedProduct;
-
-    // cartData.forEach((itm, idx) => {
-    //   if (itm.id == id) {
-    //     const prevQty = itm.quantity;
-
-    //     if (prevQty == 0) {
-    //       cartData.forEach((itm, idx) => {
-    //         if (itm.id == id) {
-              
-    //         }
-    //       })
-    //     } else {
-    //       const newQty = prevQty - 1;
-    //       const updatedProduct = { ...itm, quantity: newQty }
-
-          
-
-    //     }
-
-    //   } else {
-    //     updatedProduct = itm;
-    //   }
-      
-    // })
-  }
+    const updatedCartData = cartData.map((item) => {
+      if (item.id === id) {
+        const newQty = Math.max(item.quantity - 1, 0); 
+        return { ...item, quantity: newQty };
+      }
+      return item;
+    });
+  
+    const filteredCartData = updatedCartData.filter((item) => item.quantity > 0);
+  
+    setCartData(filteredCartData);
+  };
+  
 
   const increaseCart = (id) => {
-    
+    const updatedCartData = cartData.map((item) => {
+      if (item.id === id) {
+        return { ...item, quantity: item.quantity + 1 };
+      }
+      return item;
+    });
+
+    setCartData(updatedCartData);
   }
 
   const removeCart = (id) => {
-    
-  }
+    const updatedCartData = cartData.filter((item) => item.id !== id);
+    setCartData(updatedCartData);
+  };
+  
 
 
   return (
-    <CartContext.Provider value={{ cartData, setCartData, addCart, cartCount, increaseCart, decreaseCart, removeCart }}>
+    <CartContext.Provider value={{ cartData, setCartData, addCart, cartCount, increaseCart, decreaseCart, removeCart, subtotal }}>
       {props.children}
     </CartContext.Provider>
   );

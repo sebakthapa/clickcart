@@ -5,7 +5,9 @@ import Image from 'next/image';
 import React, { useContext } from 'react'
 
 const Page = () => {
-  const { cartData } = useContext(CartContext);
+  const { cartData, subtotal } = useContext(CartContext);
+
+  
 
   return (
     <div className='section mt-[113px]'>
@@ -14,7 +16,7 @@ const Page = () => {
       </h2>
 
       <div className="row flex justify-around lg:flex-col lg:justify-center lg:items-center gap-10">
-        <div className="cards-container flex flex-col items-center h-screen w-[50%] lg:w-full max-w-[800px] overflow-y-auto rounded-xl py-5 px-10 sm:px-5 xs:px-0 bg-[rgba(0,200,0,.1) sm:bg-transparent]">
+        <div className="cards-container flex flex-col items-center h-screen w-[50%] lg:w-full max-w-[800px] overflow-y-auto  lg:overflow-y-visible lg:h-fit rounded-xl py-5 px-10 sm:px-5 xs:px-0 bg-[rgba(0,200,0,.1) sm:bg-transparent]">
           {
             cartData.length > 0 ? (
               <>
@@ -34,10 +36,12 @@ const Page = () => {
 
         {
           cartData?.length > 0 && (
-            <div className="payments rounded-lg p-10 lg:p-5 bg-gray-100 w-[50%] lg:w-full flex flex-col gap-5 lg:gap-3 items-center">
-              {/* h2.text-bold.text */}
-              <h4 className="text-xl font-semibold mb-8">Select Payment Method:</h4>
+            <div className="payments mb-10 rounded-lg p-10 lg:p-5 bg-gray-100 w-[50%] lg:w-full flex flex-col gap-5 lg:gap-3 items-center">
+              <div className="subtotal w-full mb-10">
+                <p className='text-lg  font-bold flex gap-3'>Subtotal: <span> $ {subtotal } </span></p>
+              </div>
               <div className="method-container flex flex-wrap justify-center gap-5">
+              <h4 className="text-xl font-semibold mb-8">Select Payment Method:</h4>
                 <div className="esewa flex flex-col items-center justify-center gap-3 w-fit bgred-500 p-5 rounded-xl cursor-pointer hover:bg-green-200 hover:shadow-lg hover:-translate-y-2 transition duration-500">
                   <div className="img">
                     <Image src="/esewa.png" width={80} height={80} />
