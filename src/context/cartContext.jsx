@@ -19,11 +19,9 @@ export const CartContextProvider = (props) => {
 
     if (cartData.length > 0) {
       cartData.forEach((product) => {
-        console.log("x:", product.quantity)
         count += product.quantity;
       })
     }
-    console.log("count", count)
     setCartCount(count)
   }
 
@@ -33,14 +31,13 @@ export const CartContextProvider = (props) => {
     cartData.forEach((product) => {
       subtotal += product.price * product.quantity;
     });
-    setSubtotal(subtotal);
+    setSubtotal(subtotal.toFixed(2));
   };
 
   // Save cart data to local storage when the cartData is updated
   useEffect(() => {
     isClient && localStorage.setItem('cartData', JSON.stringify(cartData));
     setTimeout(() => {
-      console.log(cartCount, cartData)
     }, 3000)
 
 

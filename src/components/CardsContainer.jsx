@@ -4,6 +4,7 @@ import { ProductsContext } from '@/context/productsContext';
 import { groupObjectsRandomly, isClient } from '@/lib';
 import { useContext, useEffect, useState } from 'react'
 import Card from './Card';
+import { motion } from 'framer-motion';
 
 const CardsContainer = ({ arrayOfObjects }) => {
 
@@ -39,7 +40,7 @@ const CardsContainer = ({ arrayOfObjects }) => {
   }, [maxArrayLen, arrayOfObjects?.length])
 
   return (
-    <div className="cards-container  w-full flex flex-col">
+    <motion.div   className="cards-container  w-full flex flex-col">
       {
         finalProductsArray?.map((arr, idx) => {
           return (
@@ -55,7 +56,7 @@ const CardsContainer = ({ arrayOfObjects }) => {
           )
         })
       }
-    </div>
+    </motion.div>
   )
 }
 

@@ -29,38 +29,18 @@ const Nav = ({ }) => {
 
     const [searchedData, setSearchedData] = useState(null)
 
-    const searchIndex = lunr(function () {
-        this.ref("id")
-        this.field('title')
-        this.field('description')
-        this.field('category')
-
-
-
-
-
-        products?.forEach(doc => {
-            // Tokenize the text into partial word fragments
-            const tokens = doc.title.split(' ').flatMap(word => {
-                let partialWords = [];
-                for (let i = 1; i <= word.length; i++) {
-                    partialWords.push(word.slice(0, i));
-                }
-                return partialWords;
-            });
-
-            // Add partial word fragments to the index
-            tokens.forEach(token => {
-                this.add({
-                    id: doc.id,
-                    title: token,
-                    description: doc.description,
-                    category: doc.category,
-                });
-            });
+    const handleSearchData = (query) => {
+        query = query.toLowerCase()
+        const searchResult = [];
+        products?.forEach((item) => {
+            const { title, description, category } = item;
+            if (title.toLowerCase().indexOf(query) > 0 || category.toLowerCase().indexOf(query) > 0 || description.toLowerCase().indexOf(query) > 0) {
+                searchResult.push(item)
+            }
+            
         });
-
-    })
+        return searchResult;
+    }
 
     const fetchCategories = async () => {
         const response = await fetch("https://fakestoreapi.com/products/categories");
@@ -83,18 +63,11 @@ const Nav = ({ }) => {
     const handleSearchInput = (e) => {
         const query = e.target.value;
         setSearchText(query);
-        const results = searchIndex.search(query)
+        const searchResult = handleSearchData(query)
 
-        const mappedResults = results.map(result => {
-            const { ref, matchData } = result;
-            const doc = products?.find(d => d.id == ref);
-            return {
-                ...doc,
-                matchData: matchData.metadata,
-            };
-        });
+        
 
-        setSearchedData(mappedResults)
+        setSearchedData(searchResult)
 
 
     }
@@ -246,9 +219,9 @@ const Nav = ({ }) => {
                         <span className="text">
                             Cart
                         </span>
-                        <span class="cart-count relative flex h-5 w-5 ml-1">
-                            <span class="animate-ping absolute  flex h-full w-full rounded-full bg-green-700  opacity-75"></span>
-                            <span class="relative inline-flex  items-center justify-center rounded-full h-5 w-5 bg-green-800 text-white ">{cartCount}</span>
+                        <span className="cart-count relative flex h-5 w-5 ml-1">
+                            <span className="animate-ping absolute  flex h-full w-full rounded-full bg-green-700  opacity-75"></span>
+                            <span className="relative inline-flex  items-center justify-center rounded-full h-5 w-5 bg-green-800 text-white ">{cartCount}</span>
                         </span>
                     </Link>
                 </div>
@@ -302,9 +275,9 @@ const Nav = ({ }) => {
                         <span className="text">
                             Cart
                         </span>
-                        <span class="cart-count relative flex h-7 w-7 ml-1">
-                            <span class="animate-ping absolute  flex h-full w-full rounded-full bg-green-700  opacity-75"></span>
-                            <span class="relative inline-flex  items-center justify-center rounded-full h-7 w-7 bg-green-800 text-white ">{cartCount}</span>
+                        <span className="cart-count relative flex h-7 w-7 ml-1">
+                            <span className="animate-ping absolute  flex h-full w-full rounded-full bg-green-700  opacity-75"></span>
+                            <span className="relative inline-flex  items-center justify-center rounded-full h-7 w-7 bg-green-800 text-white ">{cartCount}</span>
                         </span>
                     </Link>
                 </div>
@@ -317,3 +290,40 @@ const Nav = ({ }) => {
 }
 
 export default Nav
+
+
+
+
+
+// const searchIndex = lunr(function () {
+//     this.ref("id")
+//     this.field('title')
+//     this.field('description')
+//     this.field('category')
+
+
+
+
+
+//     products?.forEach(doc => {
+//         // Tokenize the text into partial word fragments
+//         const tokens = doc.title.split(' ').flatMap(word => {
+//             let partialWords = [];
+//             for (let i = 1; i <= word.length; i++) {
+//                 partialWords.push(word.slice(0, i));
+//             }
+//             return partialWords;
+//         });
+
+//         // Add partial word fragments to the index
+//         tokens.forEach(token => {
+//             this.add({
+//                 id: doc.id,
+//                 title: token,
+//                 description: doc.description,
+//                 category: doc.category,
+//             });
+//         });
+//     });
+
+// })

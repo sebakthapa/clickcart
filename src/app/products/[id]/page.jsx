@@ -85,9 +85,9 @@ const Page = ({ params }) => {
         <div className="buy flex flex-col  gap-7">
           <div className="add flex items-center gap-5">
             <div className="counter flex items-center bg-green-50  rounded-full ">
-              <button className="- py-3 sm:py-2 text-center align-middle  text-2xl sm:text-xl px-5 sm:px-4" onClick={() => {setCount((prev) => prev == 1 ? 1 :--prev)}}>-</button>
-              <p className="count py-3 sm:py-2 text-center align-middle text-xl sm:text-lg font-semibold">{count}</p>
-              <button className="plus py-3 sm:py-2 text-center align-middle text-2xl sm:text-xl px-5 sm:px-4" onClick={() => {setCount((prev) => prev === 12 ? 12 : ++prev)}}>+</button>
+              <button className="- py-3 sm:py-2 text-center align-middle  text-2xl sm:text-xl px-5 sm:px-4" onClick={() => {setCount((prev) => Math.max(--prev, 1))}}>-</button>
+              <p title={`click add to add ${count} items`} className="count py-3 sm:py-2 text-center align-middle text-xl sm:text-lg font-semibold">{count}</p>
+              <button className="plus py-3 sm:py-2 text-center align-middle text-2xl sm:text-xl px-5 sm:px-4" onClick={() => {setCount((prev) => Math.max(++prev, 1))}}>+</button>
             </div>
             <div className="items-left text-sm">
               Hurry up!  Only<br /> <span className='text-yellow-500 text- font-bold'>{12} items</span> left.
