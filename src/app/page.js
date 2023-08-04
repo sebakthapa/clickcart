@@ -76,9 +76,9 @@ export default function Home({ }) {
           {
             categories?.map((cat, idx) => {
               return (
-                <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={categoriesVariants} >
-                  <Link href={`/products/category/${cat}`} key={idx} className='category-card block relative group overflow-hidden  min-w-[200px] w-[250px] h-[400px] sm:w-[80%] xs:w-full   rounded-xl cursor-pointer'>
-                    <Image className='absolute -z-10 top-0 left-0 w-full h-full object-cover group-hover:scale-[1.2] transition duration-500 brightness-50' src={`https://source.unsplash.com/random/180x320/?${cat}`} alt={`${cat} image`} width="200" height="300" />
+                <motion.div key={idx} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={categoriesVariants} >
+                  <Link href={`/products/category/${cat}`}  className='category-card block relative group overflow-hidden  min-w-[200px] w-[250px] h-[400px] sm:w-[80%] xs:w-full   rounded-xl cursor-pointer'>
+                    <Image  className='absolute -z-10 top-0 left-0 w-full h-full object-cover group-hover:scale-[1.2] transition duration-500 brightness-50' src={`https://source.unsplash.com/random/180x320/?${cat}`} alt={`${cat} image`} width="200" height="300" />
                     <h3 className="absolute top-[50%] translate-y-[-50%] left-0 w-full text-center text-2xl category-title capitalize font-bold text-gray-100 group-hover:opacity-100 group-hover:-translate-y-6 opacity-75 transition duration-500">{cat}</h3>
                     <p className="browse -z-10 flex items-center gap-1 justify-center capitalize absolute bottom-[0%] left-0 w-full h-full  py-5 bg-[rgba(0,0,0,.3)] text-green-800  opacity-0  group-hover:opacity-100  text-center transition duration-500  text-sm">
                       {/* {cat} <span> <AiOutlineArrowRight /> </span> */}
