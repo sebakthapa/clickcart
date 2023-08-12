@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from 'react'
 import Card from './Card';
 import { motion } from 'framer-motion';
 
-const CardsContainer = ({ arrayOfObjects }) => {
+const CardsContainer = ({ cardItems }) => {
 
 
   const [width, setWidth] = useState(isClient ? window?.innerWidth : 0);
@@ -32,12 +32,12 @@ const CardsContainer = ({ arrayOfObjects }) => {
   }, [width]);
 
   useEffect(() => {
-    if (arrayOfObjects?.length > 0) {
-      setFinalProductsArray(groupObjectsRandomly(arrayOfObjects, maxArrayLen < 1 ? 1 : maxArrayLen))
+    if (cardItems?.length > 0) {
+      setFinalProductsArray(groupObjectsRandomly(cardItems, maxArrayLen < 1 ? 1 : maxArrayLen))
 
     }
 
-  }, [maxArrayLen, arrayOfObjects?.length])
+  }, [maxArrayLen, cardItems?.length])
 
   return (
     <motion.div   className="cards-container  w-full flex flex-col">

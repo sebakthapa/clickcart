@@ -29,6 +29,10 @@ body {
   backdrop-filter: blur(3px);
 }
 
+.hide_scrollbar::-webkit-scrollbar{
+    display: none;
+}
+
 
 .animate_hover{
   animation: hover 10s ease-in-out infinite;
