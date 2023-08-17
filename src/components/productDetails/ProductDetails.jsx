@@ -13,7 +13,7 @@ const ProductDetails = ({ product }) => {
     const { cartData, addCart } = useContext(CartContext);
 
     const handleAddCart = () => {
-        const cardData = { ...fetchedProduct, quantity:count }
+        const cardData = { ...product, quantity:count }
         // console.log(cardData)
         addCart(cardData)
         // console.log(cartData)
