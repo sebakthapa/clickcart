@@ -37,7 +37,7 @@ const CardsContainer = ({ cardItems }) => {
 
     }
 
-  }, [maxArrayLen, cardItems?.length])
+  }, [maxArrayLen, cardItems])
 
   return (
     <motion.div   className="cards-container  w-full flex flex-col">

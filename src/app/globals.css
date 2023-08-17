@@ -20,8 +20,6 @@
 body {
   min-height: 100vh;
   background: hsl(0, 0%, 90%);
-  min-height: 300vh;
-
 }
 
 
@@ -125,6 +123,12 @@ body {
 }
 
 
+.shadow_glow{
+  box-shadow: 0px 0px 7px 2px;
+}
+
+
+
 
   .mobile-nav a {
     @apply  w-full flex items-center justify-center py-4 hover:bg-green-200 transition bg-green-50 cursor-pointer;
@@ -142,7 +146,7 @@ body {
 
  .section,
  .home section{
-  @apply w-full px-[5%] lg:px-5;
+  @apply w-full px-[5%] lg:px-10 sm:px-2;
   }
 
 

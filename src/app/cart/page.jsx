@@ -10,7 +10,7 @@ const Page = () => {
 
 
   return (
-    <div className='section mt-[113px]'>
+    <div className='section mt-10'>
       <h2 className="title text-3xl sm:text-xl sm:p-0 sm:pt-5 font-extrabold p-5">
         CHECKOUT
       </h2>

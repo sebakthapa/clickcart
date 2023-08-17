@@ -1,24 +1,19 @@
 import Landing from '@/components/homePage/Landing'
 import Categories from '@/components/homePage/Categories'
 import TopProducts from '@/components/homePage/TopProducts'
+import { fetchCategories, fetchProducts } from '@/lib/fetch';
 
 
 
-export default function Home() {
-  const fetchCategories = async () => {
-    const res = await fetch("https://fakestoreapi.com/products/categories", { cache: "force-cache" })
-    const data = await res.json();
-    return data;
-  }
-
-  const categories = fetchCategories();
-  
+export default async function Home() {
+  // const categories = await fetchCategories();
+  // const products = await fetchProducts();
 
   return (
     <div className='home'>
-      <Landing />
+      <Landing  />
       <TopProducts />
-      <Categories categories={categories} />
+      <Categories   />
       
     </div>
   )

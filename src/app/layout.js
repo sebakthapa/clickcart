@@ -10,6 +10,7 @@ import { ProductContexProvider } from '@/context/productsContext';
 import { QUERYCLIENTPROVIDER } from '@/lib/queryClient';
 import { CartContextProvider } from '@/context/cartContext';
 import Footer from '@/components/Footer';
+import { fetchCategories, fetchProducts } from '@/lib/fetch';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,24 +22,27 @@ export const metadata = {
 
 
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
   // const [queryClient] = React.useState(() => new QueryClient());
+  const categories = await fetchCategories();
+  const products = await fetchProducts();
+
   return (
     <html lang="en">
-      <body className={inter.className + " min-h-[100vh] max-w-[2000px]"}>
+      <body className={inter.className + " min-h-[100vh] "}>
         <QUERYCLIENTPROVIDER>
 
           <CategoriesContextProvider>
             <ProductContexProvider>
               <CartContextProvider>
-                
 
-                <div className="header fixed z-50 top-0 left-0 w-full">
+
+                <div className="header w-screen">
                   <Info message="Get 50% off on selected items" phone="+056-23485" link="#" />
-                  <Nav />
+                  <Nav categories={categories} products={products} />
                 </div>
-                <div className='min-h-screen'>
-                {children}
+                <div className='min-h-screen max-w-[2200px] mx-auto'>
+                  {children}
 
                 </div>
                 <Footer />

@@ -35,7 +35,7 @@ const Page = () => {
 
 
     return (
-        <div className='min-h-screen mt-[113px]'> 
+        <div className='min-h-screen mt-4'> 
             <h1 className='font-bold text-4xl text-green-800 p-5 sm:text-3xl sm:p-3'>PRODUCTS</h1>
             <div className="products-container  w-full flex flex-col">
                 <CardsContainer cardItems={products} />

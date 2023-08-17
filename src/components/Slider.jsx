@@ -34,7 +34,7 @@ const Slider = ({ children }) => {
             },5)
     }
     return (
-        <div className="slider pr-5 relative bg-transparent w-full">
+        <div className="slider pr-5 xs:pr-0 relative bg-transparent w-full">
 
             <button
                 className="left outline-none absolute top-1/2 -translate-y-1/2 left-0 w-20 h-20 sm:h-10 sm:w-10 rounded-full bg-[rgba(0,0,0,.2)] hover:bg-[rgba(0,0,0,.3)] active:bg-[rgba(0,0,0,.4)] bg_blur transition duration-300 z-10 flex items-center justify-center cursor-pointer"

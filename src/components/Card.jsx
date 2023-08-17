@@ -47,7 +47,6 @@ const Card = ({ type, quantity, link, priority, id, title, description, price, i
   
   
   useEffect(() => {
-    console.log(inView)
     if (inView) {
       control.start("visible");
     }

@@ -1,79 +1,34 @@
 "use client"
 
 import Link from "next/link"
-import { AiFillStar, AiOutlineSearch } from "react-icons/ai"
 import { GiHamburgerMenu } from "react-icons/gi"
 import { BiUser } from "react-icons/bi"
 import { TbShoppingCartPlus } from "react-icons/tb"
-import { PiCaretDownBold, PiPlusBold } from "react-icons/pi"
-import { Suspense, useContext, useEffect, useState } from "react"
+import { PiPlusBold } from "react-icons/pi"
+import { useContext, useEffect, useRef, useState } from "react"
 import Logo from "./Logo"
-import { useQuery } from "@tanstack/react-query"
 import { CategoriesContext } from "@/context/categoriesContext"
-import PageLoader from "./PageLoader"
-import lunr from "lunr"
 import { ProductsContext } from "@/context/productsContext"
-import Image from "next/image"
-import { getSomeWords } from "@/lib"
 import { CartContext } from "@/context/cartContext"
+import Search from "./Search"
+import { isClient } from "@/lib"
 
-const Nav = ({ }) => {
-    const { categories, setCategories } = useContext(CategoriesContext);
-    const { products, setProducts } = useContext(ProductsContext)
+const Nav = ({ categories, products }) => {
+    const { setCategories } = useContext(CategoriesContext);
+    const { setProducts } = useContext(ProductsContext);
 
-    const {cartCount} = useContext(CartContext)
-
-    const [searchText, setSearchText] = useState("");
-    const [searchFocused, setSearchFocused] = useState(false);
+    const { cartCount } = useContext(CartContext)
     const [mobileNavShown, setMobileNavShown] = useState(false);
 
-    const [searchedData, setSearchedData] = useState(null)
+    const [isSmallDevice, setIsSmallDevice] = useState(isClient ? ( window.innerWidth > 767 ? false : true) : null)
 
-    const handleSearchData = (query) => {
-        query = query.toLowerCase()
-        const searchResult = [];
-        products?.forEach((item) => {
-            const { title, description, category } = item;
-            if (title.toLowerCase().indexOf(query) > 0 || category.toLowerCase().indexOf(query) > 0 || description.toLowerCase().indexOf(query) > 0) {
-                searchResult.push(item)
-            }
-            
-        });
-        return searchResult;
-    }
-
-    const fetchCategories = async () => {
-        const response = await fetch("https://fakestoreapi.com/products/categories");
-        const res = await response.json();
-        setCategories(res)
-        return res;
-    }
-
-    const { isLoading, isError, error, data: fetchedCategories } = useQuery({ queryKey: ["categories"], queryFn: fetchCategories })
 
     useEffect(() => {
-    }, [categories])
+        setCategories(categories)
+        setProducts(products)
+    }, [categories, products])
 
 
-
-    const handleSearch = (e) => {
-        e.preventDefault();
-    }
-
-    const handleSearchInput = (e) => {
-        const query = e.target.value;
-        setSearchText(query);
-        const searchResult = handleSearchData(query)
-
-        
-
-        setSearchedData(searchResult)
-
-
-    }
-
-
-    
 
     const handleMobileNavClick = (e) => {
         const tag = e.target.tagName;
@@ -82,207 +37,134 @@ const Nav = ({ }) => {
         }
     }
 
-    const fetchAllProducts = async () => {
-        const response = await fetch("https://fakestoreapi.com/products");
-        const res = await response.json();
-        setProducts(res)
-        return res;
-    }
 
 
-    const { data: fetchedProducts } = useQuery({ queryKey: ['products'], queryFn: fetchAllProducts })
-
-    const handleSearchBlur = () => {
-        setTimeout(() => setSearchFocused(false), 250)
-    }
-
-    // if (isLoading) {
-    //     return <PageLoader />
-    // }
-
-    // if (isError) {
-    //     return "ERROR OCCURED \n" + error.message
-    // }
 
 
     return (
-        <div className='nav h-[80px] w-full py-1 px-10 xl:px-5 lg:px-3 flex justify-between items-center bg-neutral-100'>
-            <div className="left flex items-center justify-center gap-20 xl:gap-15 lg:gap-8 ">
-                <Logo />
+        <header className='nav  w-full flex flex-col justify-center  bg-neutral-100 shadow-md '>
+            <nav className="top flex justify-between items-center px-8 py-1  xl:px-5 lg:px-3  gap-5">
+                <div className="left flex items-center justify-center gap-20 xl:gap-15 lg:gap-8 ">
+                    <Logo />
+                </div>
+                {
+                    isSmallDevice || (
+                        <Search products={products} categories={categories} />
+                    )
+                }
+                <div className="right flex items-center justify-center gap-10 lg:gap-5 w-fit ">
 
-                <div className="nav-items font-medium md:hidden">
-                    <ul className="flex items-center gap-8 lg:gap-5" >
-                        <li><Link href="/">Home</Link> </li>
-                        <li>
-                            <div className="_dropdown">
-                                <p className="title flex items-center gap-1   cursor-pointer capitalize">Category<span><PiCaretDownBold /></span></p>
-                                <div className="dropdown_items bg-neutral-100">
-                                    <ul className="[] flex flex-col">
-                                        {
-                                            categories?.map((cat, idx) => {
-                                                return <Link key={idx} className="capitalize w-full h-full block" href={`/products/category/${cat}`}><li  className="">{cat} </li></Link >
-                                            })
-                                        }
-                                    </ul>
-                                </div>
+
+                    <div className="meu-btn items-center justify-center hidden md:" onClick={() => { setMobileNavShown(true) }}>
+                        <button className="  hamburger hover:bg-gray-300 transition duration-300 p-2   flex items-center justify-center rounded-full ">
+                            <GiHamburgerMenu className="w-7 h-7 " />
+                        </button>
+                    </div>
+
+                    <div className="menu font-medium flex items-center justify-center gap-8 text-xs xl:gap-4 ">
+                        <Link href="#" className="account flex items-center justify-center">
+                            <span className="icon mr-1">
+                                <BiUser className="w-5 h-5" />
+                            </span>
+                            <span className="text xs:hidden">
+                                Account
+                            </span>
+                        </Link>
+
+                        <Link href="/cart" className=" account flex items-center justify-center ">
+                            <span className="icon mr-1">
+                                <TbShoppingCartPlus className="w-5 h-5" />
+                            </span>
+                            <span className="text xs:hidden">
+                                Cart
+                            </span>
+                            <span className="cart-count xs:-ml-4 opacity-80 xs:-mt-6 relative flex h-5 w-5 ml-1">
+                                <span className="animate-ping absolute  flex h-full w-full rounded-full bg-green-700  opacity-75"></span>
+                                <span className="relative inline-flex  items-center justify-center rounded-full h-5 w-5 bg-green-800 text-white ">{cartCount}</span>
+                            </span>
+                        </Link>
+                    </div>
+                </div>
+
+
+                <div onClick={handleMobileNavClick} className={`mobile-nav overflow-auto bg-gray-100 fixed z-20 ${mobileNavShown ? "right-0" : "right-[-120%]"} top-0 min-h-screen h-fit w-screen bg_blur bg-[rgba(0,20,0,.2)] transition duration-500   uppercase text-base font-medium`}>
+                    <div className="top flex items-center justify-between px-7 py-4 bg-green-900 text-gray-100">
+                        <h2 className="text-3xl font-extrabold ">MENU</h2>
+                        <div onClick={() => setMobileNavShown(false)} className="close w-[100px] bg-red-800 px-8 py-3 rounded text-center font-semibold text-gray-200  cursor-pointer flex items-center justify-center hover:bg-red-700 transition">
+                            CLOSE <span className="inline-block rotate-45 "><PiPlusBold className="w-6 h-6" /></span>
+                        </div>
+                    </div>
+                    <div className="nav-items">
+
+                        <ul className="flex flex-col items-start justify-center -mr-2" >
+                            <div className="section">
+                                <Link href="/"><li className="">Home</li></Link>
                             </div>
-                        </li>
-                        <li><Link href="/products">Products</Link> </li>
-                    </ul>
-                </div >
-            </div>
+                            {/* categories */}
+                            <div className="section">
+                                <p className="_heading">Categories:</p>
+                                {
+                                    categories?.map((cat, idx) => {
+                                        return <Link key={idx} className="" href={`/products/category/${cat}`}>{cat}</Link >
+                                    })
+                                }
+                            </div>
 
+                            {/* other */}
+                            <div className="section">
+                                <Link href="/products"><li className="">Products</li></Link>
+                            </div>
+                        </ul>
+                    </div >
 
+                    <div className="menu flex flex-col items-center justify-center" >
+                        <Link href="#" title="My account" className="account flex items-center justify-center  w-full py-4 hover:bg-gray-300">
+                            <span className="icon mr-1">
+                                <BiUser className="w-5 h-5" />
+                            </span>
+                            <span className="text ">
+                                Account
+                            </span>
+                        </Link>
 
-            <div className="right flex items-center justify-center gap-10 lg:gap-5 w-fit ">
-                <div className={` search-container inline-block w-fit relative cursor-pointer`} >
-                    <form onSubmit={handleSearch} style={{ transition: "width .5s linear" }} className="searchInputContainer flex items-center rounded-lg">
-                        <input autoComplete="off" id="searchInput" className={` input bg-gray-100 border-solid border-gray-200 border-2 border-r-0  absolute w-[300px] xl:w-[85px] lg:w-[0] px-4  focus:w-[300px] max-w-[300px] sm:focus:w-[calc(80vw-60px)] left-auto right-[49px] text-base outline-none cursor-pointer rounded-full rounded-r-none focus:px-4 py-2 `} value={searchText} onChange={handleSearchInput} onBlur={handleSearchBlur} onFocus={() => setSearchFocused(true)} type="text" placeholder="Search Product" />
-                        <label htmlFor="searchInput" type="submit" className="icon border-solid border-gray-200 border-2 border-l-0 rounded-full rounded-l-none  w-[50px] cursor-pointer flex items-center justify-center px-4 py-2">
-                            <AiOutlineSearch className="w-6 h-6 text-gray-500" />
-                        </label>
-                    </form>
-                    <div className={`search-content ${!searchFocused ? "hidden" : "block"} absolute top-full right-0 sm:right-[-50px] w-[500px] sm:w-[90vw] bg-gray-50 rounded-lg p-5 sm:p-2 max-h-[80vh] overflow-auto`}>
+                        <Link href="/cart" title="My cart" className="account flex items-center justify-center w-full py-4 hover:bg-gray-300">
+                            <span className="icon mr-1">
+                                <TbShoppingCartPlus className="w-5 h-5" />
+                            </span>
+                            <span className="text ">
+                                Cart
+                            </span>
+                            <span className="cart-count relative flex h-7 w-7 ml-1">
+                                <span className="animate-ping absolute  flex h-full w-full rounded-full bg-green-700  opacity-75"></span>
+                                <span className="relative inline-flex  items-center justify-center rounded-full h-7 w-7 bg-green-800 text-white ">{cartCount}</span>
+                            </span>
+                        </Link>
+                    </div>
+                </div>
+
+            </nav>
+
+            {
+                isSmallDevice && (
+                    <nav className="mid px-4 py-2">
+                        <Search products={products} categories={categories} />
+                    </nav>
+                )
+            }
+
+            <nav className="bottom bg-gray-200 px-8   xl:px-5 lg:px-3 overflow-y-hidden py-[0.2rem] overflow-x-auto hide_scrollbar">
+                <div className="nav-items font-medium ">
+                    <ul className="[] flex justify-start items-center gap-5 ">
+                        <Link href="/products" ><li className="block shrink-0 w-fit hover:outline outline-2 text-sm font-semibold text-gray-700 outline-gray-500 py-2 px-[0.2rem] rounded cursor-pointer transition duration-300 ">All</li></Link>
                         {
-                            searchText ? (
-                                <>
-                                    {
-                                        searchedData?.length > 0 ? (
-                                            <div className="flex flex-col gap-5">
-                                                {
-                                                    searchedData?.map(({ title, image, id, price, rating }, idx) => {
-                                                        return (
-                                                            <Link href={`/products/${id}`} className="search-card py-5 px-7 sm:py-3 sm:px-4 flex items-center gap-3 hover:bg-gray-200" key={idx}>
-                                                                <div className="image w-[80px] h-[80px] overflow-hidden">
-                                                                    <Image className="w-full h-full object-contain" alt={title} src={image} height={100} width={50} />
-                                                                </div>
-                                                                <div className="details w-[80%] flex flex-col gap-1">
-                                                                    <h2 className="title font-bold">{getSomeWords(title, 5)}</h2>
-                                                                    <div className="others flex justify-between items-center">
-                                                                        <div className="ratings flex gap-1 items-center">
-                                                                            <span className="stars flex">
-                                                                                {
-                                                                                    Array(Math.floor(rating?.rate ? rating.rate : 0))
-                                                                                        .fill()
-                                                                                        .map((_, i) => (
-                                                                                            <AiFillStar key={i} className='text-yellow-500 w-5 h-5' />
-                                                                                        ))}
-                                                                            </span>
-                                                                            <span className="number text-sm">({rating?.count})</span>
-                                                                        </div>
-                                                                        <p className="price font-semibold">${price}</p>
-
-                                                                    </div>
-
-                                                                </div>
-                                                            </Link>
-                                                        )
-                                                    })
-                                                }
-                                            </div>
-                                        ) : (
-                                            <p className="text-center p-4">Oops! product not found...</p>
-                                        )
-
-                                    }
-                                </>
-                            ) : (
-                                <p className="text-center p-4">Start typing to search...</p>
-
-                            )
-
+                            categories?.map((cat, idx) => {
+                                return <Link key={idx} className="capitalize block shrink-0" href={`/products/category/${cat}`}><li className="hover:outline outline-2 text-sm font-semibold text-gray-700 outline-gray-500 py-2 px-[0.2rem] rounded cursor-pointer transition duration-300 ">{cat} </li></Link >
+                            })
                         }
-                    </div>
-
-                </div>
-
-                <div className="meu-btn items-center justify-center hidden md:flex" onClick={() => { setMobileNavShown(true) }}>
-                    <button className="  hamburger hover:bg-gray-300 transition duration-300 p-2   flex items-center justify-center rounded-full ">
-                        <GiHamburgerMenu className="w-7 h-7 " />
-                    </button>
-                </div>
-
-                <div className="menu font-medium flex items-center justify-center gap-8 text-xs xl:gap-4 md:hidden">
-                    <Link href="#" className="account flex items-center justify-center">
-                        <span className="icon mr-1">
-                            <BiUser className="w-5 h-5" />
-                        </span>
-                        <span className="text">
-                            Account
-                        </span>
-                    </Link>
-
-                    <Link href="/cart" className=" account flex items-center justify-center ">
-                        <span className="icon mr-1">
-                            <TbShoppingCartPlus className="w-5 h-5" />
-                        </span>
-                        <span className="text">
-                            Cart
-                        </span>
-                        <span className="cart-count relative flex h-5 w-5 ml-1">
-                            <span className="animate-ping absolute  flex h-full w-full rounded-full bg-green-700  opacity-75"></span>
-                            <span className="relative inline-flex  items-center justify-center rounded-full h-5 w-5 bg-green-800 text-white ">{cartCount}</span>
-                        </span>
-                    </Link>
-                </div>
-            </div>
-
-
-            <div onClick={handleMobileNavClick} className={`mobile-nav overflow-auto bg-gray-100 fixed z-20 ${mobileNavShown ? "right-0" : "right-[-120%]"} top-0 min-h-screen h-fit w-screen bg_blur bg-[rgba(0,20,0,.2)] transition duration-500  hdden uppercase text-base font-medium`}>
-                <div className="top flex items-center justify-between px-7 py-4 bg-green-900 text-gray-100">
-                    <h2 className="text-3xl font-extrabold ">MENU</h2>
-                    <div onClick={() => setMobileNavShown(false)} className="close w-[100px] bg-red-800 px-8 py-3 rounded text-center font-semibold text-gray-200  cursor-pointer flex items-center justify-center hover:bg-red-700 transition">
-                        CLOSE <span className="inline-block rotate-45 "><PiPlusBold className="w-6 h-6" /></span>
-                    </div>
-                </div>
-                <div className="nav-items">
-
-                    <ul className="flex flex-col items-start justify-center -mr-2" >
-                        <div className="section">
-                            <Link href="/"><li className="">Home</li></Link>
-                        </div>
-                        {/* categories */}
-                        <div className="section">
-                            <p className="_heading">Categories:</p>
-                            {
-                                categories?.map((cat, idx) => {
-                                    return <Link key={idx} className="" href={`/products/category/${cat}`}>{cat}</Link >
-                                })
-                            }
-                        </div>
-
-                        {/* other */}
-                        <div className="section">
-                            <Link href="/products"><li className="">Products</li></Link>
-                        </div>
                     </ul>
                 </div >
-
-                <div className="menu flex flex-col items-center justify-center" >
-                    <Link href="#" className="account flex items-center justify-center  w-full py-4 hover:bg-gray-300">
-                        <span className="icon mr-1">
-                            <BiUser className="w-5 h-5" />
-                        </span>
-                        <span className="text">
-                            Account
-                        </span>
-                    </Link>
-
-                    <Link href="/cart" className="account flex items-center justify-center w-full py-4 hover:bg-gray-300">
-                        <span className="icon mr-1">
-                            <TbShoppingCartPlus className="w-5 h-5" />
-                        </span>
-                        <span className="text">
-                            Cart
-                        </span>
-                        <span className="cart-count relative flex h-7 w-7 ml-1">
-                            <span className="animate-ping absolute  flex h-full w-full rounded-full bg-green-700  opacity-75"></span>
-                            <span className="relative inline-flex  items-center justify-center rounded-full h-7 w-7 bg-green-800 text-white ">{cartCount}</span>
-                        </span>
-                    </Link>
-                </div>
-            </div>
-        </div>
+            </nav>
+        </header>
 
 
 

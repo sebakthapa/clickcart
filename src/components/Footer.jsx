@@ -4,7 +4,7 @@ import { FaFacebook, FaGithub, FaLinkedin } from 'react-icons/fa';
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-800 text-white p-4 py-10 mt-20">
+        <footer className="bg-gray-800 text-white p-4 py-10 mt-20 ">
             <div className="container mx-auto text-center">
                 <div className="flex justify-center items-center mb-4 space-x-4">
                     <a href="https://www.facebook.com/sebakthapa7" target="_blank" className='inline-block hover:-translate-y-1 transition duration-300' rel="noopener noreferrer">
