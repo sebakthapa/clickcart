@@ -1,5 +1,5 @@
 "use client"
-import { filterString } from "@/lib"
+import { filterString, isClient } from "@/lib"
 import { useEffect, useRef, useState } from "react"
 import { PiCaretDownBold } from "react-icons/pi"
 
@@ -21,7 +21,7 @@ const Dropdown = ({ options, onChange, }) => {
     }, [options])
 
 
-    window.addEventListener("mousedown", () => {
+    isClient && window.addEventListener("mousedown", () => {
         optionsShown && setOptionsShown(false)
     })
 
