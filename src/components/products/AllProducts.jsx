@@ -35,7 +35,7 @@ const AllProducts = ({ products: customProducts }) => {
     return (
         <div className='min-h-screen mt-4'>
             <div className="top flex justify-between items-center px-2 sm:flex-col sm:items-start">
-                <h1 className='font-bold text-4xl text-green-800 p-5 sm:text-3xl sm:p-3'>PRODUCTS</h1>
+                <h1 className='font-bold text-4xl text-green-800 p-5 sm:text-3xl sm:p-3 capitalize  shrink-0'>{ customProducts?.length > 0 ? customProducts[0].category : "All Products" }</h1>
                 <div className="options  flex item-center w-full gap-10 justify-end px-3">
                     {/* <div className="filter">
                         I am filter and this long
