@@ -1,7 +1,5 @@
 "use client"
-import PageLoader from '@/components/PageLoader';
 import { CartContext } from '@/context/cartContext';
-import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useContext, useState } from 'react';
@@ -18,7 +16,12 @@ const ProductDetails = ({ product }) => {
         addCart(cardData)
         // console.log(cartData)
         setCount(1)
-      }
+    }
+
+
+
+    
+
 
 
     return (

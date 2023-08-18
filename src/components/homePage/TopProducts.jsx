@@ -21,7 +21,7 @@ const TopProducts = ({}) => {
 
                     {topProducts?.map(({ id, title, price, description, rating, image, category }, idx) => {
                         return (
-                            <div key={title} className="w-[400px] xs:w-[100vw]  shrink-0 xs:shrink-1">
+                            <div key={title} className="w-[400px] xs:w-[100vw]  min-w-[300px]   shrink-0 sm:flex-shrink">
                                 <Card priority={idx < 8} link={`/products/${id}`} key={idx} id={id} title={title} price={price} description={description} rating={rating} image={image} category={category} />
                             </div>
                         )

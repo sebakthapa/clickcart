@@ -11,7 +11,8 @@ export function shuffleArray(array) {
 
 export function groupObjectsRandomly(objects, maxObjectsPerGroup) {
   // Step 1: Shuffle the array of objects randomly
-  const shuffledObjects = shuffleArray(objects);
+  // const shuffledObjects = shuffleArray(objects); //shuffling done
+  const shuffledObjects = objects; //shuffling not done
 
   // Step 2: Create groups of arrays
   const groups = [];
@@ -40,3 +41,21 @@ export function getSomeWords(text, num) {
 }
 
 export const isClient = typeof window !== 'undefined';
+
+
+
+export const filterString = (string) => {
+  return string.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+}
+
+
+export function sortProductsByPriceLowToHigh(products) {
+  return products.slice().sort((a, b) => a.price - b.price);
+}
+export function sortProductsByPriceHighToLow(products) {
+  return products.slice().sort((a, b) => b.price - a.price);
+}
+
+export function sortProductsByTopRating(products) {
+  return products.slice().sort((a, b) => b.rating.rate - a.rating.rate);
+}

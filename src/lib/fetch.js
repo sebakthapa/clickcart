@@ -16,4 +16,10 @@ export const fetchSingleProduct = async (id) => {
     const response = await fetch(`https://fakestoreapi.com/products/${id}`, { cache: "force-cache" });
     const res = await response.json();
     return res;
-  }
+}
+  
+export const fetchByCategory = async (category) => {
+    const response = await fetch(`https://fakestoreapi.com/products/category/${category}`);
+    const res = await response.json();
+    return res;
+}
