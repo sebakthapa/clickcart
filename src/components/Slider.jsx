@@ -3,40 +3,35 @@
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai"
 
 const Slider = ({ children }) => {
-
     const handleLeftScroll = (e) => {
         const slider = e.target.nextElementSibling;
 
         const scrollPosition = slider.scrollLeft;
-
+        
         if (scrollPosition > 0) {
             let count = 0;
-            const scrollPos = slider.scrollLeft;
-            const width = parseInt(window.getComputedStyle(slider).width);
-
             const scrollInterval = setInterval(() => {
-                console.log(slider.scrollLeft, )
-                slider.scrollLeft -= 20;
+                slider.scrollLeft-= 10;
                 count++;
-                if (slider.scrollLeft < (scrollPos - width) || slider.scrollLeft == 0) {
+                if (count > 35) {
                     clearInterval(scrollInterval)
                 }
-            }, 5)
+            },5)
         }
     }
-
-
     const handleRightScroll = (e) => {
         const slider = e.target.previousElementSibling;
-        const width = parseInt(window.getComputedStyle(slider).width);
-        const scrollPos = slider.scrollLeft;
 
-        const scrollInterval = setInterval(() => {
-            slider.scrollLeft += 20;
-            if (slider.scrollLeft > (scrollPos + width) || slider.scrollLeft >= (slider.scrollWidth - slider.clientWidth)) {
-                clearInterval(scrollInterval)
-            }
-        }, 5)
+        
+        
+            let count = 0;
+            const scrollInterval = setInterval(() => {
+                slider.scrollLeft+= 10;
+                count++;
+                if (count > 35) {
+                    clearInterval(scrollInterval)
+                }
+            },5)
     }
     return (
         <div className="slider pr-5 xs:pr-0 relative bg-transparent w-full">
