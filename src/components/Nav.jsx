@@ -62,7 +62,7 @@ const Nav = ({ categories, products }) => {
                     </div>
 
                     <div className="menu font-medium flex items-center justify-center gap-8 text-xs xl:gap-4 ">
-                        <Link href="#" className="account flex items-center justify-center">
+                        <Link href="#" className="account flex items-center justify-center" title="This is not currently available.">
                             <span className="icon mr-1">
                                 <BiUser className="w-5 h-5" />
                             </span>

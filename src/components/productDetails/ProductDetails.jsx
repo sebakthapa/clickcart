@@ -19,16 +19,15 @@ const ProductDetails = ({ product }) => {
     }
 
 
+    const handleMouseEnter = (e) => {
 
-    
-
-
+    }
 
     return (
         <div className='product-details  flex md:flex-col-reverse justify-center gap-10 w-full 0 p-10 sm:p-5'>
             <div className="images w-[50%] lg:w-[50%] md:w-full flex flex-col items-center gap-5">
                 <div className="image p-5 bg-white overflow-hidden rounded-lg">
-                    <Image priority="true" alt={product.title} className='object-contain' src={product.image} height={400} width={600} />
+                    <Image onMouseEnter={handleMouseEnter}   priority="true" alt={product.title} className='object-contain ' src={product.image} height={400} width={600} />
                 </div>
                 <div className="option-images flex justify-center gap-3 w-fit">
                     <Image alt={product.title} className='cursor-pointer w-15% xl:w-[80px] xs:w-[60px] p-4 xs:p-2 bg-green-100 rounded-lg hover:scale-110 transition duration-300' src={product.image} height={100} width={100} />
