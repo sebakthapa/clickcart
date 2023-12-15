@@ -13,6 +13,9 @@ import Footer from '@/components/Footer';
 import { fetchCategories, fetchProducts } from '@/lib/fetch';
 import { ToastContainer, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Analytics } from '@vercel/analytics/react';
+
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -50,6 +53,8 @@ export default async function RootLayout({ children }) {
                   transition={Zoom}
                   limit={4}
                 />
+                <Analytics />
+
 
                 <div className="header w-screen">
                   <Info message="Get 50% off on selected items" phone="+056-23485" link="#" />
