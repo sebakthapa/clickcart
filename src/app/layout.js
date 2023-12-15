@@ -11,7 +11,8 @@ import { QUERYCLIENTPROVIDER } from '@/lib/queryClient';
 import { CartContextProvider } from '@/context/cartContext';
 import Footer from '@/components/Footer';
 import { fetchCategories, fetchProducts } from '@/lib/fetch';
-
+import { ToastContainer, Zoom } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -35,7 +36,20 @@ export default async function RootLayout({ children }) {
           <CategoriesContextProvider>
             <ProductContexProvider>
               <CartContextProvider>
-
+                <ToastContainer
+                  position="bottom-right"
+                  autoClose={4000}
+                  hideProgressBar
+                  newestOnTop
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="colored"
+                  transition={Zoom}
+                  limit={4}
+                />
 
                 <div className="header w-screen">
                   <Info message="Get 50% off on selected items" phone="+056-23485" link="#" />

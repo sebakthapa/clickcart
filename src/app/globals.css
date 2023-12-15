@@ -197,3 +197,24 @@ body {
     min-height: 24px;
   }
 }
+
+
+
+
+
+
+
+
+
+/* */
+
+.input_container{
+  @apply flex flex-col-reverse gap-1
+}
+.input_container label{
+  @apply font-medium
+}
+
+.input_container input{
+  @apply px-5 py-2 rounded border-2 border-gray-300
+}

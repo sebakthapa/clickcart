@@ -103,11 +103,15 @@ export const CartContextProvider = (props) => {
     const updatedCartData = cartData.filter((item) => item.id !== id);
     setCartData(updatedCartData);
   };
+
+  const clearCart = () => {
+    setCartData([])
+  }
   
 
 
   return (
-    <CartContext.Provider value={{ cartData, setCartData, addCart, cartCount, increaseCart, decreaseCart, removeCart, subtotal }}>
+    <CartContext.Provider value={{ cartData, setCartData, addCart, cartCount, increaseCart, decreaseCart, removeCart, subtotal, clearCart }}>
       {props.children}
     </CartContext.Provider>
   );
