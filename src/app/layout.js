@@ -24,8 +24,6 @@ export const metadata = {
 }
 
 
-
-
 export default async function RootLayout({ children }) {
   // const [queryClient] = React.useState(() => new QueryClient());
   const categories = await fetchCategories();

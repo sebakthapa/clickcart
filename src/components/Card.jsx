@@ -1,5 +1,4 @@
 import { CartContext } from '@/context/cartContext';
-import { getSomeWords } from '@/lib';
 import Image from 'next/image'
 import Link from 'next/link';
 import React, { useContext, useEffect, useState } from 'react'
@@ -67,7 +66,7 @@ const Card = ({ type, quantity, link, priority, id, title, description, price, i
 
       <div className="texts h-[40%] flex flex-col justify-between gap-2 py-4 px-5">
         <div className="top flex items-start justify-between gap-3">
-          <Link href={link}><h5 className="title hover:text-orange-500 font-semibold transition duration-300">{getSomeWords(title, 5)}</h5></Link>
+          <Link href={link}><h5 className="title hover:text-orange-500 font-semibold transition duration-300 line-clamp-2">{title}</h5></Link>
           <p className="price font-semibold">${price}</p>
         </div>
 

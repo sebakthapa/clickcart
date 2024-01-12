@@ -28,8 +28,8 @@ const Categories = ({  }) => {
                         return (
                             <motion.div className="xs:w-full w-full " key={idx} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={categoriesVariants} >
                                 <Link href={`/products/category/${cat}`} className='category-card block relative group overflow-hidden mx-auto  min-w-[250px] w-full max-w-[400px] h-[400px]    rounded cursor-pointer'>
-                                    <Image className='absolute -z-10 top-0 left-0 w-full h-full object-cover group-hover:scale-[1.2] transition duration-500 brightness-50' src={`https://source.unsplash.com/random/180x320/?${cat}`} alt={`${cat}`} width="200" height="300" />
-                                    <h3 className="absolute top-[50%] translate-y-[-50%] left-0 w-full text-center text-xl category-title capitalize font-bold text-gray-100 group-hover:opacity-100 group-hover:-translate-y-6 opacity-75 transition duration-500">{cat}</h3>
+                                    <Image className='absolute -z-10 top-0 left-0 w-full h-full object-cover group-hover:scale-[1.2] transition duration-500 brightness-50' src={ `/${cat}.jpg`} alt={`${cat}`} width="200" height="300" />
+                                    <h3 className="absolute top-[50%] translate-y-[-50%] left-0 w-full text-center text-xl category-title capitalize font-bold text-gray-100 group-hover:scale-125 group-hover:opacity-100 group-hover:-translate-y-6 opacity-75 transition duration-500">{cat}</h3>
                                     
                                 </Link>
                             </motion.div>
